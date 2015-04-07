@@ -7,7 +7,7 @@ Subject: [PATCH] Add the ability to hide exclamation marks from signal
 Change-Id: Ia0e0fd4fe6c279243e49e4d300a6703f9c8f8ac5
 ---
  .../policy/MSimNetworkControllerImpl.java          | 24 ++++++++++++++++++----
- 1 file changed, 20 insertions(+), 4 deletions(-)
+ 1 file changed, 23 insertions(+), 4 deletions(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/policy/MSimNetworkControllerImpl.java b/packages/SystemUI/src/com/android/systemui/statusbar/policy/MSimNetworkControllerImpl.java
 index 7ecba4e..3fc5c6d 100644
@@ -94,13 +94,16 @@ index 7ecba4e..3fc5c6d 100644
              }
          }
  
-@@ -1565,6 +1577,10 @@ public class MSimNetworkControllerImpl extends NetworkControllerImpl {
+@@ -1565,6 +1577,13 @@ public class MSimNetworkControllerImpl extends NetworkControllerImpl {
              for (MSimSignalCluster cluster : mSimSignalClusters) {
                  cluster.setShowEmptySimSlots(showEmptySlots);
              }
 +            mShowExclamationMarks = showExclamationMarks();
 +            for (int i = 0; i < mPhoneCount; i++) {
 +                updateTelephonySignalStrength(i);
++                updateDataNetType(i);
++                updateDataIcon(i);
++                refreshViews(i);
 +            }
          }
      }

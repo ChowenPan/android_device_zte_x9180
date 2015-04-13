@@ -62,6 +62,12 @@ then
 else 
     git am ../../../device/ZTE/X9180/patches/signal-without-exclamation-mark-settings.patch || git am --abort
 fi
+if grep -q "Show/Hide empty sim message" res/xml/status_bar_settings.xml
+then
+    echo '[Hide empty SIM] Settings already patched';
+else 
+    git am ../../../device/ZTE/X9180/patches/Show-Hide-notice-empty-SIM.patch || git am --abort
+fi
 croot
 
 cd hardware/qcom/media-caf/msm8974

@@ -5,41 +5,14 @@ Subject: [PATCH] Show/Hide notice empty SIM
 
 Change-Id: I7e5638e6c788c6ab5c670e4c9705ead4cce806bb
 ---
- packages/Keyguard/res/values-ru/cm_strings.xml     |  1 +
- packages/Keyguard/res/values/cm_strings.xml        |  2 +-
- .../src/com/android/keyguard/CarrierText.java      | 40 ++++++++++++++++++++--
- 3 files changed, 40 insertions(+), 3 deletions(-)
+ .../src/com/android/keyguard/CarrierText.java      | 35 +++++++++++++++++++++-
+ 1 file changed, 34 insertions(+), 1 deletion(-)
 
-diff --git a/packages/Keyguard/res/values-ru/cm_strings.xml b/packages/Keyguard/res/values-ru/cm_strings.xml
-index d7871e1..d2a5980 100644
---- a/packages/Keyguard/res/values-ru/cm_strings.xml
-+++ b/packages/Keyguard/res/values-ru/cm_strings.xml
-@@ -22,6 +22,7 @@
-   <string name="kg_dismiss">Пропустить</string>
-   <string name="kg_slot_name">Слот <xliff:g id="number">%d</xliff:g>: новая SIM-карта\u0020</string>
-   <string name="lockscreen_sim_error_message_short">Ошибка карты.</string>
-+	
-   <plurals name="kg_password_default_pin_message">
-     <item quantity="one">Введите PIN-код. У вас осталась <xliff:g id="number">%d</xliff:g> попытка перед тем, как вам придется обратиться к оператору для разблокировки.</item>
-     <item quantity="few">Введите PIN-код. У вас осталось <xliff:g id="number">%d</xliff:g> попытки.</item>
-diff --git a/packages/Keyguard/res/values/cm_strings.xml b/packages/Keyguard/res/values/cm_strings.xml
-index e6113ff..f8615ee 100644
---- a/packages/Keyguard/res/values/cm_strings.xml
-+++ b/packages/Keyguard/res/values/cm_strings.xml
-@@ -28,7 +28,7 @@
- 
-     <!-- Shown in the lock screen when there is SIM card IO error. -->
-     <string name="lockscreen_sim_error_message_short">Invalid card.</string>
--
-+	
-     <!-- Instructions telling the user remaining times when enter SIM PIN view.  -->
-     <plurals name="kg_password_default_pin_message">
-         <item quantity="one">Enter SIM PIN, you have <xliff:g id="number">%d</xliff:g> remaining attempt before you must contact your carrier to unlock your device.</item>
 diff --git a/packages/Keyguard/src/com/android/keyguard/CarrierText.java b/packages/Keyguard/src/com/android/keyguard/CarrierText.java
-index 6b7b39c..de76bc8 100644
+index 6b7b39c..1e8f461 100644
 --- a/packages/Keyguard/src/com/android/keyguard/CarrierText.java
 +++ b/packages/Keyguard/src/com/android/keyguard/CarrierText.java
-@@ -27,11 +27,16 @@ import android.util.Log;
+@@ -27,6 +27,10 @@ import android.util.Log;
  import android.view.View;
  import android.widget.TextView;
  
@@ -50,77 +23,60 @@ index 6b7b39c..de76bc8 100644
  import com.android.internal.telephony.IccCardConstants;
  import com.android.internal.widget.LockPatternUtils;
  
- import java.util.Locale;
- 
-+
- public class CarrierText extends TextView {
-     private static final String TAG = "CarrierText";
-     private static final boolean DEBUG = KeyguardConstants.DEBUG;
-@@ -43,7 +48,25 @@ public class CarrierText extends TextView {
- 
+@@ -44,6 +48,23 @@ public class CarrierText extends TextView {
      private boolean mDisplayAirplaneMode;
      private boolean mAirplaneModeActive;
--
-+    
+ 
 +    private boolean mShowEmptySimMessage;
 +
 +    class SettingsObserver extends ContentObserver {
-+		SettingsObserver(Handler handler) {
-+			super(handler);
-+		}
++          SettingsObserver(Handler handler) {
++               super(handler);
++          }
 +
-+		void observe() {
-+			mContext.getContentResolver().registerContentObserver(System.getUriFor("status_bar_hide_empty_sim_message"), false, this);
-+		}
-+	
-+		@Override
-+		public void onChange(boolean selfChange) {
-+			updateSettings();
-+		}
-+	}    
-+    
-+    
++          void observe() {
++               mContext.getContentResolver().registerContentObserver(System.getUriFor("status_bar_hide_empty_sim_message"), false, this);
++          }
++
++          @Override
++          public void onChange(boolean selfChange) {
++               updateSettings();
++          }
++     }
++
      private KeyguardUpdateMonitorCallback mCallback = new KeyguardUpdateMonitorCallback() {
          @Override
          public void onRefreshCarrierInfo(long subId, CharSequence plmn, CharSequence spn) {
-@@ -71,6 +94,7 @@ public class CarrierText extends TextView {
-             setSelected(true);
-         };
-     };
-+    
- 
-     /**
-      * The status of this lock screen. Primarily used for widgets on LockScreen.
-@@ -106,6 +130,14 @@ public class CarrierText extends TextView {
+@@ -106,6 +127,14 @@ public class CarrierText extends TextView {
              a.recycle();
          }
          setTransformationMethod(new CarrierTextTransformationMethod(mContext, useAllCaps));
-+        
++
 +        new SettingsObserver(new Handler()).observe();
 +    }
-+    
++
 +    private void updateSettings() {
 +        mShowEmptySimMessage = (System.getInt(mContext.getContentResolver(), "status_bar_hide_empty_sim_message", 1) != 0);
 +        Log.d(TAG, "mShowEmptySimMessage = " + mShowEmptySimMessage);
-+		updateCarrierText();
++        updateCarrierText();
      }
  
      @Override
-@@ -200,9 +232,13 @@ public class CarrierText extends TextView {
+@@ -200,9 +229,13 @@ public class CarrierText extends TextView {
                  // This depends on mPlmn containing the text "Emergency calls only" when the radio
                  // has some connectivity. Otherwise, it should be null or empty and just show
                  // "No SIM card"
 -                carrierText =  makeCarrierStringOnEmergencyCapable(
 +                if (!mShowEmptySimMessage){
-+                	carrierText = null;
++                        carrierText = null;
 +                } else {
-+                	carrierText =  makeCarrierStringOnEmergencyCapable(
++                        carrierText =  makeCarrierStringOnEmergencyCapable(
                          getContext().getText(R.string.keyguard_missing_sim_message_short),
                          plmn);
-+                }                
++                }
                  break;
  
              case SimPermDisabled:
 -- 
-1.9.1
+2.1.4
 

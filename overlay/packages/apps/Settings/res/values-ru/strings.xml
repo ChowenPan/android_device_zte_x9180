@@ -21,4 +21,7 @@
     <string name="su_indicator_summary">Показывать индикатор суперпользователя (#) в строке состояния, когда он используется</string>
     <string name="statusbar_exclamation_marks_display">Индикаторы подключения к интернет</string>
     <string name="statusbar_exclamation_marks_desc">Показывать восклицательные знаки рядом с индикаторами сигнала, когда отсутствует подключение к интернет</string>
+    <string name="status_bar_toggle_empty_sim_message">Уведомление об отсутствии SIM-карты</string>
+    <string name="status_bar_toggle_empty_sim_message_summary_off">Скрывать уведомление, если SIM-карта не установлена</string>
+    <string name="status_bar_toggle_empty_sim_message_summary_on">Показывать уведомление, если SIM-карта не установлена</string>
 </resources>

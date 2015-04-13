@@ -41,6 +41,12 @@ then
 else
     git am ../../device/ZTE/X9180/patches/signal-without-exclamation-mark-frameworks-base.patch || git am --abort
 fi
+if grep -q "mShowEmptySimMessage" packages/Keyguard/src/com/android/keyguard/CarrierText.java
+then
+    echo '[Notice empty SIM] Frameworks/base already patched';
+else
+    git am ../../device/ZTE/X9180/patches/Notice-empty-SIM-base.patch || git am --abort
+fi
 croot
 
 cd packages/apps/Settings
@@ -64,9 +70,9 @@ else
 fi
 if grep -q "Show/Hide empty sim message" res/xml/status_bar_settings.xml
 then
-    echo '[Hide empty SIM] Settings already patched';
+    echo '[Notice empty SIM] Settings already patched';
 else 
-    git am ../../../device/ZTE/X9180/patches/Show-Hide-notice-empty-SIM.patch || git am --abort
+    git am ../../../device/ZTE/X9180/patches/Notice-empty-SIM-settings.patch || git am --abort
 fi
 croot
 

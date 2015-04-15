@@ -109,6 +109,15 @@ else
 fi
 croot
 
+cd packages/apps/Contacts
+if grep -q "WRITE_MEDIA_STORAGE" AndroidManifest.xml
+then
+    echo '[vcards export] Contacts already patched';
+else
+    git am ../../../device/ZTE/X9180/patches/export-vcards-contacts.patch || git am --abort
+fi
+croot
+
 cd device/ZTE/X9180
 if [ "$WITH_EXTERNAL_WRITABLE" = "1" ]; then
 	git am ../../../device/ZTE/X9180/patches/external-writable-1.patch || git am --abort

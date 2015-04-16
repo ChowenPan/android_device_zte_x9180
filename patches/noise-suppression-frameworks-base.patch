@@ -1,0 +1,69 @@
+From 3550727c7763cdad6b2dfc58f9a2dedf3d5045f7 Mon Sep 17 00:00:00 2001
+From: Daniel Hillenbrand <codeworkx@cyanogenmod.org>
+Date: Sat, 24 Nov 2012 16:05:47 -0500
+Subject: [PATCH] implement noise suppression for phone calls (1/3)
+
+Make the default value of in-call noise suppression configurable.
+
+Fix the value type of def_noise_suppression
+
+settings provider: add noise suppression
+---
+ core/java/android/provider/Settings.java                          | 8 ++++++++
+ packages/SettingsProvider/res/values/defaults.xml                 | 3 +++
+ .../src/com/android/providers/settings/DatabaseHelper.java        | 4 ++++
+ 3 files changed, 15 insertions(+)
+
+diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
+index ccacda7..d4175a4 100644
+--- a/core/java/android/provider/Settings.java
++++ b/core/java/android/provider/Settings.java
+@@ -2752,6 +2752,13 @@ public static void setShowGTalkServiceStatusForUser(ContentResolver cr, boolean
+         public static final String TTY_MODE = "tty_mode";
+ 
+         /**
++         * Whether noise suppression is enabled. The value is
++         * boolean (1 or 0).
++         * @hide
++         */
++        public static final String NOISE_SUPPRESSION = "noise_suppression";
++
++        /**
+          * Whether the sounds effects (key clicks, lid open ...) are enabled. The value is
+          * boolean (1 or 0).
+          */
+@@ -3455,6 +3462,7 @@ public static void setShowGTalkServiceStatusForUser(ContentResolver cr, boolean
+             DTMF_TONE_TYPE_WHEN_DIALING,
+             HEARING_AID,
+             TTY_MODE,
++            NOISE_SUPPRESSION,
+             SOUND_EFFECTS_ENABLED,
+             HAPTIC_FEEDBACK_ENABLED,
+             POWER_SOUNDS_ENABLED,       // moved to global
+diff --git a/packages/SettingsProvider/res/values/defaults.xml b/packages/SettingsProvider/res/values/defaults.xml
+index cbd6181..8d0473d 100644
+--- a/packages/SettingsProvider/res/values/defaults.xml
++++ b/packages/SettingsProvider/res/values/defaults.xml
+@@ -236,4 +236,7 @@
+     <integer name="def_people_lookup">1</integer>
+     <!-- Default protected sms originating address values of Settings.Secure.PROTECTED_SMS_ADDRESSES -->
+     <string-array name="def_protected_sms_list_values"></string-array>
++
++    <!-- Default value of Settings.System.NOISE_SUPPRESSION -->
++    <bool name="def_noise_suppression">false</bool>
+ </resources>
+diff --git a/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java b/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
+index d0e0c70..75edf91 100644
+--- a/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
++++ b/packages/SettingsProvider/src/com/android/providers/settings/DatabaseHelper.java
+@@ -2401,6 +2401,10 @@ private void loadSystemSettings(SQLiteDatabase db) {
+             // Set default tty mode
+             loadSetting(stmt, Settings.System.TTY_MODE, 0);
+ 
++            // Set default noise suppression value
++            loadBooleanSetting(stmt, Settings.System.NOISE_SUPPRESSION,
++                    R.bool.def_noise_suppression);
++
+             loadIntegerSetting(stmt, Settings.System.SCREEN_BRIGHTNESS,
+                     R.integer.def_screen_brightness);
+ 

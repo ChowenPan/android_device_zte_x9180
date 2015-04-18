@@ -1,0 +1,62 @@
+diff --git a/charger/charger.c b/charger/charger.c
+index 83d46c6..891b43e 100644
+--- a/charger/charger.c
++++ b/charger/charger.c
+@@ -76,10 +76,12 @@
+ #define LAST_KMSG_PATH          "/proc/last_kmsg"
+ #define LAST_KMSG_MAX_SZ        (32 * 1024)
+ 
++#include <android/log.h>
++
+ #if 1
+-#define LOGE(x...) do { KLOG_ERROR("charger", x); } while (0)
+-#define LOGI(x...) do { KLOG_INFO("charger", x); } while (0)
+-#define LOGV(x...) do { KLOG_DEBUG("charger", x); } while (0)
++#define LOGE(x...) do { __android_log_print(ANDROID_LOG_ERROR, "charger", x); } while (0)
++#define LOGI(x...) do { __android_log_print(ANDROID_LOG_ERROR, "charger", x); } while (0)
++#define LOGV(x...) do { __android_log_print(ANDROID_LOG_ERROR, "charger", x); } while (0)
+ #else
+ #define LOG_NDEBUG 0
+ #define LOG_TAG "charger"
+@@ -526,7 +528,7 @@ static void process_ps_uevent(struct charger *charger, struct uevent *uevent)
+             return;
+ #endif
+ 
+-    if (!strncmp(ps_type, "Battery", 7))
++    if (strcmp("bms", uevent->ps_name) == 0)
+         battery = true;
+ 
+     online = atoi(uevent->ps_online);
+@@ -707,6 +709,20 @@ static void android_blue(void)
+     gr_color(0, 191, 255, 255);
+ }
+ 
++static void draw_capacity(struct charger *charger)
++{
++    char cap_str[64];
++    int x, y;
++    int str_len_px;
++
++    snprintf(cap_str, sizeof(cap_str), "%d%%", charger->batt_anim->capacity);
++    str_len_px = gr_measure(cap_str);
++    x = (gr_fb_width() - str_len_px) / 2;
++    y = (gr_fb_height() + char_height) / 2;
++    android_blue();
++    gr_text(x, y, cap_str, 0);
++}
++
+ /* returns the last y-offset of where the surface ends */
+ static int draw_surface_centered(struct charger *charger, gr_surface surface)
+ {
+@@ -759,8 +775,10 @@ static void redraw_screen(struct charger *charger)
+     /* try to display *something* */
+     if (batt_anim->capacity < 0 || batt_anim->num_frames == 0)
+         draw_unknown(charger);
+-    else
++    else {
+         draw_battery(charger);
++	draw_capacity(charger);
++    }
+     gr_flip();
+ }
+ 

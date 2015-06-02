@@ -26,6 +26,7 @@
             android:title="@string/cpugov"
             android:summary="@string/cpugov_balanced"
             android:dialogTitle="@string/cpugov_balanced"
+            android:enabled="false"
             >
         </ListPreference>
         <ListPreference
@@ -33,6 +34,7 @@
             android:title="@string/cpugov"
             android:summary="@string/cpugov_powersave"
             android:dialogTitle="@string/cpugov_powersave"
+            android:enabled="false"
             >
         </ListPreference>
         <SwitchPreference
@@ -90,4 +92,21 @@
     <!--Preference android:title="@string/port_enabler">
         <intent android:action="com.ztemt.port.ENTRY_ACTION" />
     </Preference-->
+    <PreferenceCategory
+        android:key="ambient_display_key"
+        android:title="@string/ambient_display_title" >
+
+        <SwitchPreference
+            android:key="gesture_hand_wave"
+            android:defaultValue="false"
+            android:title="@string/hand_wave_gesture_title"
+            android:summary="@string/hand_wave_gesture_summary" />
+
+        <SwitchPreference
+            android:key="gesture_pocket"
+            android:defaultValue="false"
+            android:title="@string/pocket_gesture_title"
+            android:summary="@string/pocket_gesture_summary" />
+
+    </PreferenceCategory>
 </PreferenceScreen>

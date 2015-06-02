@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
+import android.provider.Settings;
+
 /**
  * Created by prodoomman on 19.02.15.
  */
@@ -31,6 +35,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     final String CPU_BOOST = "/sys/module/cpu_boost/parameters/cpu_boost";
     final String INTELLIPLUG_BOOST = "/sys/module/intelli_plug/parameters/touch_boost_active";
+
+    private static final String CATEGORY_AMBIENT_DISPLAY = "ambient_display_key";
 
     ListPreference charge_level;
     SwitchPreference fast_charge;
@@ -120,9 +126,18 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         }
     }
 
+    private boolean isDozeEnabled() {
+        return Settings.Secure.getInt(getActivity().getContentResolver(),
+                Settings.Secure.DOZE_ENABLED, 1) != 0;
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.pref_x9180);
+
+        PreferenceCategory ambientDisplay =
+            (PreferenceCategory) findPreference(CATEGORY_AMBIENT_DISPLAY);
+        ambientDisplay.setEnabled(isDozeEnabled());
 
         ListPreference main_storage = (ListPreference)findPreference("main_storage");
         main_storage.setOnPreferenceChangeListener(this);

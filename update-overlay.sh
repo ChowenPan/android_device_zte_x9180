@@ -13,7 +13,7 @@ xmlstarlet ed \
 --insert '/dashboard-categories/dashboard-category[@android:id="@+id/system_section"]/dashboard-tile[not(@android:id)]' \
 --type attr -n android:title -v "@string/device_settings" \
 --insert '/dashboard-categories/dashboard-category[@android:id="@+id/system_section"]/dashboard-tile[not(@android:id)]' \
---type attr -n android:icon -v "@drawable/ic_settings_profiles" \
+--type attr -n android:icon -v "@drawable/ic_settings_applications" \
 --subnode '/dashboard-categories/dashboard-category[@android:id="@+id/system_section"]/dashboard-tile[not(@android:id)]' \
 --type elem -n intent \
 --insert '/dashboard-categories/dashboard-category[@android:id="@+id/system_section"]/dashboard-tile[not(@android:id)]/intent' \

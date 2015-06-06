@@ -383,6 +383,8 @@ case "$target" in
         chmod -h 664 /sys/devices/system/cpu/cpu1/online
         chmod -h 664 /sys/devices/system/cpu/cpu2/online
         chmod -h 664 /sys/devices/system/cpu/cpu3/online
+        echo "simple_ondemand" > /sys/class/kgsl/kgsl-3d0/devfreq/governor
+        echo "msm_cpufreq" > /sys/class/devfreq/qcom,cpubw.65/governor
     ;;
 esac
 

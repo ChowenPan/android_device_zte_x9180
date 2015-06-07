@@ -17,6 +17,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     final String PALM2SLEEP_FILE = "/sys/devices/f9927000.i2c/i2c-5/5-005d/palm2sleep";
     final String CPU_BOOST = "/sys/module/cpu_boost/parameters/cpu_boost";
     final String INTELLIPLUG_BOOST = "/sys/module/intelli_plug/parameters/touch_boost_active";
+    final String WAKEUP_GESTURE_FILE = "/sys/devices/f9927000.i2c/i2c-5/5-005d/wakeup_gesture";
 
     public BootCompletedReceiver() {
     }
@@ -63,6 +64,16 @@ public class BootCompletedReceiver extends BroadcastReceiver {
             Log.d("X9180", "Trying to change palm2sleep value");
             FileOutputStream fos = new FileOutputStream(PALM2SLEEP_FILE);
             fos.write((palm2sleep?"1":"0").getBytes(Charset.forName("UTF-8")));
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        boolean dt2w = prefs.getBoolean("dt2w", true);
+        try {
+            Log.d("X9180", "Trying to change dt2w value");
+            FileOutputStream fos = new FileOutputStream(WAKEUP_GESTURE_FILE);
+            fos.write((dt2w?"1":"0").getBytes(Charset.forName("UTF-8")));
             fos.close();
         } catch (Exception e) {
             e.printStackTrace();

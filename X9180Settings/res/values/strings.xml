@@ -23,6 +23,7 @@
     <string name="intelliplug_boost">Cpu cores boost</string>
     <string name="cpu_boost_summary"></string>
     <string name="intelliplug_boost_summary"></string>
+    <string name="dt2w_title">Double tap to wake</string>
 
     <!-- Gesture shortcuts -->
     <string name="ambient_display_title">Ambient display</string>

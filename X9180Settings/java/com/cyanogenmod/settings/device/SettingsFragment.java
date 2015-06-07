@@ -36,11 +36,14 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     final String CPU_BOOST = "/sys/module/cpu_boost/parameters/cpu_boost";
     final String INTELLIPLUG_BOOST = "/sys/module/intelli_plug/parameters/touch_boost_active";
 
+    final String WAKEUP_GESTURE_FILE = "/sys/devices/f9927000.i2c/i2c-5/5-005d/wakeup_gesture";
+
     private static final String CATEGORY_AMBIENT_DISPLAY = "ambient_display_key";
 
     ListPreference charge_level;
     SwitchPreference fast_charge;
     SwitchPreference palm2sleep;
+    SwitchPreference dt2w;
 
     private class SysfsValue {
         private String fileName;
@@ -159,6 +162,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         palm2sleep = (SwitchPreference)findPreference("palm2sleep");
         palm2sleep.setOnPreferenceChangeListener(this);
+
+        dt2w = (SwitchPreference)findPreference("dt2w");
+        dt2w.setOnPreferenceChangeListener(this);
 
         SwitchPreference cpuboost = (SwitchPreference)findPreference("cpu_boost_freq");
         cpuboost.setOnPreferenceChangeListener(this);
@@ -310,6 +316,27 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         {
             BufferedReader br = null;
             try {
+                br = new BufferedReader(new FileReader(WAKEUP_GESTURE_FILE));
+                String line = br.readLine().trim();
+
+                if (line != null) {
+                    dt2w.setChecked("0x01".equals(line));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null)
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+            }
+        }
+
+        {
+            BufferedReader br = null;
+            try {
                 br = new BufferedReader(new FileReader(CPU_BOOST));
                 String line = br.readLine().trim();
 
@@ -376,6 +403,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 break;
             case "palm2sleep":
                 new SysfsWriteTask().execute(new SysfsValue(PALM2SLEEP_FILE,
+                        ((Boolean)newValue)?"1":"0"));
+                break;
+            case "dt2w":
+                new SysfsWriteTask().execute(new SysfsValue(WAKEUP_GESTURE_FILE,
                         ((Boolean)newValue)?"1":"0"));
                 break;
             case "cpu_boost_freq":

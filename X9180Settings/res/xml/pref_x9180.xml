@@ -78,6 +78,11 @@
             >
         </ListPreference>
         <SwitchPreference
+            android:key="dt2w"
+            android:title="@string/dt2w_title"
+            android:defaultValue="true"
+            />
+        <SwitchPreference
             android:key="palm2sleep"
             android:title="@string/palm2sleep_title"
             android:defaultValue="true"

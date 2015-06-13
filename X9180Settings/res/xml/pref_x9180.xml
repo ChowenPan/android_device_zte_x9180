@@ -81,11 +81,6 @@
             android:summary="%s"
             >
         </ListPreference>
-        <SwitchPreference
-            android:key="dt2w"
-            android:title="@string/dt2w_title"
-            android:defaultValue="true"
-            />
         <ListPreference
             android:key="dt2w_screen_policy"
             android:title="@string/dt2w_screen_title"
@@ -93,7 +88,6 @@
             android:entryValues="@array/dt2w_policy_values"
             android:defaultValue="TURN_ON"
             android:summary="%s"
-            android:dependency="dt2w"
             >
         </ListPreference>
         <ListPreference
@@ -103,7 +97,6 @@
             android:entryValues="@array/dt2w_policy_values"
             android:defaultValue="DOZE"
             android:summary="%s"
-            android:dependency="dt2w"
             >
         </ListPreference>
         <ListPreference
@@ -113,7 +106,6 @@
             android:entryValues="@array/dt2w_policy_values"
             android:defaultValue="DOZE"
             android:summary="%s"
-            android:dependency="dt2w"
             >
         </ListPreference>
         <ListPreference
@@ -123,7 +115,6 @@
             android:entryValues="@array/dt2w_policy_values"
             android:defaultValue="DOZE"
             android:summary="%s"
-            android:dependency="dt2w"
             >
         </ListPreference>
         <SwitchPreference

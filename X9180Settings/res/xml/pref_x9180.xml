@@ -81,6 +81,10 @@
             android:summary="%s"
             >
         </ListPreference>
+        <Preference
+            android:key="dt2w"
+            android:title="@string/dt2w_title"
+            />
         <ListPreference
             android:key="dt2w_screen_policy"
             android:title="@string/dt2w_screen_title"

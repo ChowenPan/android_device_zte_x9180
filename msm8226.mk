@@ -272,13 +272,14 @@ PRODUCT_PACKAGES += \
     hostapd.accept \
     hostapd.deny \
     hostapd \
-    wpa_supplicant \
-    wpa_supplicant.conf
+    hostapd_default.conf \
+    wpa_supplicant
 
 PRODUCT_PACKAGES += \
     p2p_supplicant_overlay.conf \
     wpa_supplicant_overlay.conf \
-    wpa_supplicant_ath6kl.conf
+    wpa_supplicant_ath6kl.conf \
+    wpa_supplicant_wcn.conf
 
 PRODUCT_PACKAGES += \
     libantradio \
@@ -347,8 +348,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/sensor_def_qcomdev.conf:system/etc/sensor_def_qcomdev.conf \
     $(LOCAL_PATH)/etc/thermal-engine-8226.conf:system/etc/thermal-engine-8226.conf \
     $(LOCAL_PATH)/etc/xtra_root_cert.pem:system/etc/xtra_root_cert.pem \
-    $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf \
-    $(LOCAL_PATH)/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
+    $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
@@ -357,3 +357,6 @@ PRODUCT_COPY_FILES += \
 # Changelog
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/CHANGELOG-X9180.txt:system/etc/CHANGELOG-X9180.txt
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf

@@ -1,4 +1,4 @@
-package com.cyanogenmod.settings.device;
+package com.slim.device.settings;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +20,8 @@ import java.util.Arrays;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.provider.Settings;
+
+import com.slim.device.R;
 
 /**
  * Created by prodoomman on 19.02.15.
@@ -43,10 +45,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     ListPreference charge_level;
     SwitchPreference fast_charge;
     SwitchPreference palm2sleep;
-    ListPreference dt2w_screen;
-    ListPreference dt2w_left;
-    ListPreference dt2w_middle;
-    ListPreference dt2w_right;
 
     private class SysfsValue {
         private String fileName;
@@ -165,36 +163,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         palm2sleep = (SwitchPreference)findPreference("palm2sleep");
         palm2sleep.setOnPreferenceChangeListener(this);
-
-        dt2w_screen = (ListPreference)findPreference("dt2w_screen_policy");
-        dt2w_screen.setOnPreferenceChangeListener(this);
-
-        dt2w_left = (ListPreference)findPreference("dt2w_left_policy");
-        dt2w_left.setOnPreferenceChangeListener(this);
-
-        dt2w_middle = (ListPreference)findPreference("dt2w_middle_policy");
-        dt2w_middle.setOnPreferenceChangeListener(this);
-
-        dt2w_right = (ListPreference)findPreference("dt2w_right_policy");
-        dt2w_right.setOnPreferenceChangeListener(this);
-
-        String value = null;
-
-        value = Settings.System.getString(getActivity().getContentResolver(), "dt2w_screen_policy");
-        if(value != null)
-            dt2w_screen.setValue(value);
-
-        value = Settings.System.getString(getActivity().getContentResolver(), "dt2w_left_policy");
-        if(value != null)
-            dt2w_left.setValue(value);
-
-        value = Settings.System.getString(getActivity().getContentResolver(), "dt2w_middle_policy");
-        if(value != null)
-            dt2w_middle.setValue(value);
-
-        value = Settings.System.getString(getActivity().getContentResolver(), "dt2w_right_policy");
-        if(value != null)
-            dt2w_right.setValue(value);
 
         SwitchPreference cpuboost = (SwitchPreference)findPreference("cpu_boost_freq");
         cpuboost.setOnPreferenceChangeListener(this);
@@ -429,14 +397,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             case "cpugov_powersave":
                 SystemProperties.set("persist.cpu.gov.powersave", (String) newValue);
                 SystemProperties.set("sys.perf.profile", SystemProperties.get("sys.perf.profile"));
-                break;
-            case "dt2w_screen_policy":
-            case "dt2w_left_policy":
-            case "dt2w_middle_policy":
-            case "dt2w_right_policy":
-                Settings.System.putString(getActivity().getContentResolver(), preference.getKey(), (String)newValue);
-                break;
-            default:
                 break;
         }
         return true;

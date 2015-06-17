@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cyanogenmod.settings.device"
+    package="com.slim.device"
     coreApp="true"
     android:sharedUserId="android.uid.system" >
 
@@ -16,12 +16,12 @@
         android:theme="@style/AppTheme"
         android:persistent="true" >
         <activity
-            android:name=".SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:label="@string/app_name" >
         </activity>
 
         <receiver
-            android:name=".BootCompletedReceiver" >
+            android:name=".settings.BootCompletedReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -29,23 +29,23 @@
         </receiver>
 
         <receiver
-            android:name=".MediaStateChangedReceiver" >
+            android:name=".settings.MediaStateChangedReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_REMOVED" />
                 <data android:scheme="file" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.cyanogenmod.settings.device.X9180DozeService"
+        <service android:name="com.slim.device.settings.X9180DozeService"
                  android:permission="X9180DozeService">
         </service>
 
         <activity
-            android:name=".TouchscreenGestureSettings"
+            android:name=".settings.ScreenOffGestureSettings"
             android:label="@string/screen_gestures_panel_title"
             android:theme="@android:style/Theme.Material.Settings">
             <intent-filter>
-                <action android:name="com.cyanogenmod.action.LAUNCH_TOUCHSCREEN_GESTURE_SETTINGS" />
+                <action android:name="com.slim.action.LAUNCH_SCREEN_OFF_GESTURE_SETTINGS" />
             </intent-filter>
             <meta-data
                 android:name="com.android.settings.title"

@@ -1,4 +1,4 @@
-package com.cyanogenmod.settings.device;
+package com.slim.device.settings;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

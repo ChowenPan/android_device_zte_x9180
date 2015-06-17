@@ -1,4 +1,4 @@
-package com.cyanogenmod.settings.device;
+package com.slim.device.settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

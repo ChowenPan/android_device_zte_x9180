@@ -16,9 +16,30 @@
     <string name="storages_category">Пам’ять</string>
     <string name="tuning_category">Оптимізація</string>
     <string name="zram_title">ZRam</string>
-    <string name="cpugov">Cpu governor</string>
+    <string name="cpugov">Управління частотою процесора</string>
     <string name="cpugov_balanced">Збалансований режим - %s</string>
-    <string name="cpugov_powersave">Powersave mode - %s</string>
+    <string name="cpugov_powersave">Енергозберігаючий режим - %s</string>
     <string name="cpu_boost">Підвищення частоти процесора</string>
     <string name="intelliplug_boost">Активація додаткових ядер</string>
+    <string name="dt2w_title">Подвійний тап для виходу зі сна</string>
+    <string name="dt2w_screen_title">Натисніть на екран</string>
+    <string name="dt2w_left_title">Натисніть на ліву кнопку</string>
+    <string name="dt2w_middle_title">Натисніть на середню кнопку</string>
+    <string name="dt2w_right_title">Натисніть на праву кнопку</string>
+    <string name="dt2w_policy_turn_on">Включити телефон</string>
+    <string name="dt2w_policy_doze">Показати сповіщення</string>
+    <string name="dt2w_policy_camera">Відкрити камеру</string>
+    <string name="dt2w_policy_track_prev">Попередній трек</string>
+    <string name="dt2w_policy_track_next">Наступний трек</string>
+    <string name="dt2w_policy_play_pause">Пауза/відтворення</string>
+    <string name="dt2w_policy_torch">Увімкнути ліхтарик</string>
+    <string name="dt2w_policy_none">Нічого не робити</string>
+    <!-- Gesture shortcuts -->
+    <string name="ambient_display_title">Навколишній екран</string>
+    <string name="screen_gestures_panel_title">Жести</string>
+    <string name="screen_gestures_panel_summary">Використовувати жести для виконання певних дій</string>
+    <string name="hand_wave_gesture_title">Помах рукою</string>
+    <string name="hand_wave_gesture_summary">Показувати сповіщування після помаху рукою біля екрану телефону</string>
+    <string name="pocket_gesture_title">Карман</string>
+    <string name="pocket_gesture_summary">Показувати сповіщення після вилучення телефону з кишені</string>
 </resources>

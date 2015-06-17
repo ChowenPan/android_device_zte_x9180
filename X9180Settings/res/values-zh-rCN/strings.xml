@@ -10,7 +10,7 @@
     <string name="fail">未知错误。</string>
     <string name="fast_charge">启用快速充电</string>
     <string name="charge_level">快速充电电流，mA</string>
-    <string name="palm2sleep_title">手掌覆盖屏幕进入休眠</string>
+    <string name="palm2sleep_title">手掌覆盖锁屏</string>
     <string name="touchscreen_category">触屏</string>
     <string name="charger_category">充电</string>
     <string name="storages_category">存储</string>
@@ -21,4 +21,25 @@
     <string name="cpugov_powersave">节能模式 - %s</string>
     <string name="cpu_boost">Cpu 频率提升</string>
     <string name="intelliplug_boost">Cpu 内核提升</string>
+    <string name="dt2w_title">双击唤醒</string>
+    <string name="dt2w_screen_title">触摸屏幕动作</string>
+    <string name="dt2w_left_title">触摸左侧按钮的动作</string>
+    <string name="dt2w_middle_title">触摸中间按钮的动作</string>
+    <string name="dt2w_right_title">触摸右侧按钮的动作</string>
+    <string name="dt2w_policy_turn_on">开启手机</string>
+    <string name="dt2w_policy_doze">显示消息</string>
+    <string name="dt2w_policy_camera">打开相机</string>
+    <string name="dt2w_policy_track_prev">打开上一首音乐</string>
+    <string name="dt2w_policy_track_next">打开下一首音乐</string>
+    <string name="dt2w_policy_play_pause">暂停/播放 音乐</string>
+    <string name="dt2w_policy_torch">启用手电筒</string>
+    <string name="dt2w_policy_none">什么也不做</string>
+    <!-- Gesture shortcuts -->
+    <string name="ambient_display_title">背光显示</string>
+    <string name="screen_gestures_panel_title">手势</string>
+    <string name="screen_gestures_panel_summary">用手势来执行一些操作</string>
+    <string name="hand_wave_gesture_title">挥手</string>
+    <string name="hand_wave_gesture_summary">手掌在距离感应器前反复挥动，屏幕背光显示锁屏通知。</string>
+    <string name="pocket_gesture_title">口袋</string>
+    <string name="pocket_gesture_summary">从口袋中拿出时，屏幕背光显示锁屏通知。</string>
 </resources>

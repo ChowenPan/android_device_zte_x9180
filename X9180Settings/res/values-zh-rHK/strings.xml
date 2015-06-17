@@ -21,4 +21,25 @@
     <string name="cpugov_powersave">節能模式 - %s</string>
     <string name="cpu_boost">Cpu 頻率提升</string>
     <string name="intelliplug_boost">Cpu 內核提升</string>
+    <string name="dt2w_title">雙擊喚醒</string>
+    <string name="dt2w_screen_title">觸摸屏幕動作</string>
+    <string name="dt2w_left_title">觸摸左側按鈕的動作</string>
+    <string name="dt2w_middle_title">觸摸中間按鈕的動作</string>
+    <string name="dt2w_right_title">觸摸右側按鈕的動作</string>
+    <string name="dt2w_policy_turn_on">開啟手機</string>
+    <string name="dt2w_policy_doze">顯示消息</string>
+    <string name="dt2w_policy_camera">打開相機</string>
+    <string name="dt2w_policy_track_prev">打開上壹首音樂</string>
+    <string name="dt2w_policy_track_next">打開下壹首音樂</string>
+    <string name="dt2w_policy_play_pause">暫停/播放 音樂</string>
+    <string name="dt2w_policy_torch">啟用手電筒</string>
+    <string name="dt2w_policy_none">什麽也不做</string>
+    <!-- Gesture shortcuts -->
+    <string name="ambient_display_title">背光顯示</string>
+    <string name="screen_gestures_panel_title">手勢</string>
+    <string name="screen_gestures_panel_summary">用手勢來執行壹些操作</string>
+    <string name="hand_wave_gesture_title">揮手</string>
+    <string name="hand_wave_gesture_summary">手掌在距離感應器前反復揮動，屏幕背光顯示鎖屏通知。</string>
+    <string name="pocket_gesture_title">口袋</string>
+    <string name="pocket_gesture_summary">從口袋中拿出時，屏幕背光顯示鎖屏通知。</string>
 </resources>

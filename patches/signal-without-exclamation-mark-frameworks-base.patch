@@ -1,4 +1,4 @@
-From 01101d47776a08585102b9e59f5a01b9a264f3a3 Mon Sep 17 00:00:00 2001
+From e55ff6c9a2f1963be80a0b6d277957f0a5aca856 Mon Sep 17 00:00:00 2001
 From: proDOOMman <prodoomman@gmail.com>
 Date: Sat, 4 Apr 2015 18:46:41 +0300
 Subject: [PATCH] Add the ability to hide exclamation marks from signal
@@ -10,7 +10,7 @@ Change-Id: Ia0e0fd4fe6c279243e49e4d300a6703f9c8f8ac5
  1 file changed, 58 insertions(+), 7 deletions(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/policy/MSimNetworkControllerImpl.java b/packages/SystemUI/src/com/android/systemui/statusbar/policy/MSimNetworkControllerImpl.java
-index aea81b5..a3ee2ee 100644
+index 03b73c8..c8ff9db 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/policy/MSimNetworkControllerImpl.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/policy/MSimNetworkControllerImpl.java
 @@ -30,6 +30,7 @@ import android.content.Intent;
@@ -50,24 +50,24 @@ index aea81b5..a3ee2ee 100644
                  mMSimDataTypeIconId[phoneId],
                  mMSimDataRoamIconId[phoneId],
                  mMSimContentDescriptionPhoneSignal[phoneId],
-@@ -356,7 +363,7 @@ public class MSimNetworkControllerImpl extends NetworkControllerImpl {
-             cluster.setMobileDataIndicators(
+@@ -357,7 +364,7 @@ public class MSimNetworkControllerImpl extends NetworkControllerImpl {
                      true,
                      mAlwaysShowCdmaRssi ? mPhoneSignalIconId : mWimaxIconId,
+                     mMSimMobileActivityIconId[phoneId],
 -                    mInetCondition,
 +                    mShowExclamationMarks?mInetCondition:1,
-                     mMSimMobileActivityIconId[phoneId],
                      mMSimDataTypeIconId[phoneId],
                      mMSimDataRoamIconId[phoneId],
-@@ -370,7 +377,7 @@ public class MSimNetworkControllerImpl extends NetworkControllerImpl {
-                     mHasMobileDataFeature,
+                     mContentDescriptionWimax,
+@@ -371,7 +378,7 @@ public class MSimNetworkControllerImpl extends NetworkControllerImpl {
                      mShowPhoneRSSIForData ? mMSimPhoneSignalIconId[phoneId]
                          : mMSimDataSignalIconId[phoneId],
+                     mMSimMobileActivityIconId[phoneId],
 -                    mInetCondition,
 +                    mShowExclamationMarks?mInetCondition:1,
-                     mMSimMobileActivityIconId[phoneId],
                      mMSimDataTypeIconId[phoneId],
                      mMSimDataRoamIconId[phoneId],
+                     mMSimContentDescriptionPhoneSignal[phoneId],
 @@ -795,7 +802,7 @@ public class MSimNetworkControllerImpl extends NetworkControllerImpl {
                  }
  

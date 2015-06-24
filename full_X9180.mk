@@ -14,14 +14,52 @@
 # limitations under the License.
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
-# Inherit from X9180 device
-$(call inherit-product, device/ZTE/X9180/device.mk)
-
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := X9180
 PRODUCT_BRAND := ZTE
 PRODUCT_MODEL := X9180
 PRODUCT_MANUFACTURER := ZTE
+
+# System Properties
+-include $(LOCAL_PATH)/system_prop.mk
+
+# Ramdisk
+PRODUCT_PACKAGES += \
+    init.rc \
+    fstab.X9180 \
+    fstab.sd \
+    fstab.int \
+    fstab.zram_64 \
+    fstab.zram_128 \
+    fstab.zram_256 \
+    fstab.zram_512 \
+    init.class_main.sh \
+    init.mdm.sh \
+    init.nubia.sh \
+    init.nubia.usb.rc \
+    init.qcom.class_core.sh \
+    init.qcom.early_boot.sh \
+    init.qcom.factory.sh \
+    init.qcom.rc \
+    init.qcom.sdcard.rc \
+    init.recovery.qcom.rc \
+    init.qcom.sh \
+    init.qcom.ssr.sh \
+    init.qcom.syspart_fixup.sh \
+    init.qcom.usb.sh \
+    init.target.rc \
+    init.trace.rc \
+    init.usb.rc \
+    ueventd.qcom.rc \
+    ueventd.rc
+
+PRODUCT_PACKAGES += \
+    adbd \
+    healthd
+
+PRODUCT_PACKAGES += \
+    file_contexts \
+    property_contexts \
+    seapp_contexts \
+    selinux_version \
+    service_contexts

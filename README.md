@@ -10,8 +10,8 @@ Local manifest for TWRP:
 
   <project name="CyanogenMod/android_device_qcom_common" path="device/qcom/common" remote="github" revision="cm-12.1" />
 
-  <project name="X9180/android_kernel_zte_x9180.git" path="kernel/ZTE/X9180" remote="gitlab" revision="cm-12.1" />
-  <project name="X9180/android_device_zte_x9180.git" path="device/ZTE/X9180" remote="gitlab" revision="cm-12.1" />
+  <project name="X9180/android_kernel_zte_x9180.git" path="kernel/ZTE/X9180" remote="gitlab" revision="cm-11.0-twrp" />
+  <project name="X9180/android_device_zte_x9180.git" path="device/ZTE/X9180" remote="gitlab" revision="twrp" />
 
 </manifest>
 ```
